@@ -1,0 +1,160 @@
+<html>
+    <head>
+        <title>Rouge</title>
+        <link rel="stylesheet" type="text/css" href="main.css">   
+    </head>
+    <body>
+        <canvas id="canvas" width="100" height="100"></canvas>
+	<script type="text/javascript" src="source/AssetManager.js"></script>
+        <script type="text/javascript">
+                
+                function getCTX () {
+                    return document.getElementById('canvas').getContext('2d');
+                }
+                
+                function PrepareFrame () {}
+                PrepareFrame.prototype.config = function (canvas) {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                PrepareFrame.prototype.disableBars = function() {
+                    document.documentElement.style.overflow = 'hidden';
+                    document.body.scroll = 'no';
+                }
+                PrepareFrame.prototype.set = function (canvas) {
+                    this.config(canvas);
+                    this.disableBars();
+                }
+                /*
+                function AssetManager() {
+		    this.successCount = 0;
+		    this.errorCount = 0;
+		    this.cache = {};
+		    this.downloadQueue = [];
+		    this.soundsQueue = [];
+		}
+		AssetManager.prototype.queueDownload = function(path) {
+		    this.downloadQueue.push(path);
+		}
+		AssetManager.prototype.queueSound = function(id, path) {
+		    this.soundsQueue.push({id: id, path: path});
+		}
+		AssetManager.prototype.downloadAll = function(downloadCallback) {
+		    if (this.downloadQueue.length === 0 && this.soundsQueue.length === 0) {
+			downloadCallback();
+		    }
+		    this.downloadSounds(downloadCallback);
+		    for (var i = 0; i < this.downloadQueue.length; i++) {
+			var path = this.downloadQueue[i];
+			var img = new Image();
+			var that = this;
+			img.addEventListener("load", function() {
+			    console.log(this.src + ' is loaded');
+			    that.successCount += 1;
+			    if (that.isDone()) {
+				downloadCallback();
+			    }
+			}, false);
+			img.addEventListener("error", function() {
+			    that.errorCount += 1;
+			    if (that.isDone()) {
+				downloadCallback();
+			    }
+			}, false);
+			img.src = path;
+			this.cache[path] = img;
+		    }
+		}
+		AssetManager.prototype.downloadSounds = function(soundsCallback) {
+		    var that = this;
+		    /*
+		    soundManager.onready(function() {
+			console.log('soundManager ready');
+			for (var i = 0; i < that.soundsQueue.length; i++) {
+			    that.downloadSound(that.soundsQueue[i].id, that.soundsQueue[i].path, soundsCallback);
+			}
+		    });
+		    soundManager.ontimeout(function() {
+			console.log('SM2 did not start');
+		    });
+		    
+		}
+		AssetManager.prototype.downloadSound = function(id, path, soundsCallback) {
+		    var that = this;
+		    this.cache[path] = soundManager.createSound({
+			id: id,
+			autoLoad: true,
+			url: path,
+			onload: function() {
+			    console.log(this.url + ' is loaded');
+			    that.successCount += 1;
+			    if (that.isDone()) {
+				soundsCallback();
+			    }
+			}
+		    });
+		}
+		AssetManager.prototype.getSound = function(path) {
+		    return this.cache[path];
+		}
+		AssetManager.prototype.getAsset = function(path) {
+		    return this.cache[path];
+		}
+		AssetManager.prototype.isDone = function() {
+		    return ((this.downloadQueue.length + this.soundsQueue.length) == this.successCount + this.errorCount);
+		}
+		
+                // prepare frame for fullscreen
+		*/
+                var canvas = document.getElementById('canvas');
+                var prep = new PrepareFrame();
+                prep.set(canvas);
+                
+		
+		var _AM = new AssetManager();
+                _AM.queueDownload('assets/milano_blue.png');
+		_AM.downloadAll(function(){
+		    var sprite = _AM.getAsset('assets/milano_blue.png');
+		    getCTX().imageSmoothingEnabled = false;
+		    getCTX().webkitImageSmoothingEnabled = false;
+		    getCTX().mozImageSmoothingEnabled = false;
+		    getCTX().drawImage(sprite, 64,64,256,256);
+		});
+                
+                
+                function main () {
+                    var $c = getCTX();
+                // do cool things with the context
+                // try to draw board
+                    var $wh = window.innerWidth;
+                    var $wb = window.innerWidth;
+                    var $squaremeter = 64;
+                    
+                    $c.beginPath();
+                     for (var $x = 0; $x <= $wb; $x += $squaremeter) {
+                        $c.moveTo($x, 0);
+                        $c.lineTo($x, $wh);
+                    }
+                    for (var $y = 0; $y <= $wh; $y += $squaremeter) {
+                        $c.moveTo(0, $y);
+                        $c.lineTo($wb, $y);
+                    }
+                    $c.strokeStyle = "#2F2F2F";
+		    $c.lineWidth = 1;
+                    $c.stroke();
+                // try ends
+
+                $c.font = '40pt Calibri';
+                $c.fillStyle = 'blue';
+                $c.fillText("Hallo welt", 150, 100);
+                    
+                    
+                }
+
+                main();
+		
+    
+        </script>
+    </body>
+    
+</html>

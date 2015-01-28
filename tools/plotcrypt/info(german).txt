@@ -1,0 +1,5 @@
+Alle Storytexte würden beim Quelltext durch sehen im Klartext auftauchen.
+Damit eine Überraschung bleibt möchte ich alle texte, außer menüs, "verschlüsseln"!
+
+Es geht hier nicht um "unknackbarkeit" sondern nur darum die Texte für Menschen unlesbar zu machen.
+MfG RuBiBo

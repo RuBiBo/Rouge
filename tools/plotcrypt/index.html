@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Rouge => tools => plotcrypt</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+        <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="source/MiniCrypt.js"></script>
+    </head>
+    <body>
+        <textarea id= "textbox1" name="message" rows="10" cols="30">This is a test text!</textarea>
+        <br/>
+        <input id="keybox" value="x!34bbGH_"/>
+        <br/>
+        <textarea id= "textbox2" name="message" rows="10" cols="30">
+            See here crypted text.
+        </textarea>
+        <br/>
+        <textarea id= "textbox3" name="message" rows="10" cols="30">
+            For checking see here the encryptet text.
+        </textarea>
+        <br/>
+        <button type="button" id="button1">Start</button>
+	
+    </body>
+    <script>
+        function click1 () {
+            var cry = new MiniCrypt();
+            
+            var code = cry.DE($('#keybox').val(),$('#textbox1').val());
+            $('#textbox2').val(code);
+            var uncode = cry.EN($('#keybox').val(),code);
+            $('#textbox3').val(uncode);
+        }
+        
+        $( document ).ready(function() {
+            $( "#button1" ).click(function() {
+                click1();
+            });
+        });
+    </script>
+</html>

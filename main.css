@@ -1,0 +1,18 @@
+body { 
+   background-color: #000000;
+   font-family: Verdana;
+   color: #FFFFFF;
+   padding: 0px;
+   margin: 0px;
+}
+canvas {
+    margin: 0px;
+    padding: 0px;
+}
+canvas, img {
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+}
