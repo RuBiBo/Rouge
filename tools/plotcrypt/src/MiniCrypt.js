@@ -1,8 +1,12 @@
 function MiniCrypt () {
-    /****
-     * modifyer = rot13 like
-     */
-    this.modifyer = -64;
+    this.checkOver = function (value) {
+        if (value > 255) {
+            value -= 254;
+        } else if (value < 1) {
+            value += 254;
+        }
+        return value
+    }
 }
 /*******
  * stechKey adjust key length
@@ -43,8 +47,8 @@ MiniCrypt.prototype.DE = function fn1 (key, text) {
     for (i = 0;i < text.length ;i++) {
         currentKeyChar = strechedKey.charCodeAt(i);
         currentChar = text.charCodeAt(i);
-        x = parseInt(currentKeyChar) + parseInt(currentChar) + this.modifyer;
-        //console.log("crypt("+i+")"+currentChar + "+" + currentKeyChar +"="+x);
+        x = parseInt(currentKeyChar) + parseInt(currentChar);
+        x = this.checkOver(x);
         message += String.fromCharCode(x);
     }
     
@@ -60,9 +64,9 @@ MiniCrypt.prototype.EN = function fn2 (key,text) {
     for (i = 0;i < text.length ;i++) {
         currentKeyChar = strechedKey.charCodeAt(i);
         currentChar = text.charCodeAt(i);
-        x = parseInt(currentKeyChar) - parseInt(currentChar) + this.modifyer;
+        x = parseInt(currentKeyChar) - parseInt(currentChar);
         x = -1*x;
-        //console.log("enc("+i+")"+currentChar + "-" + currentKeyChar +"="+x);
+        x = this.checkOver(x);
         message += String.fromCharCode(x);
     }
     

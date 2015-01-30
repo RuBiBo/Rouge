@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<plott>
-     <titel>test1</titel>
-     <description>test1 ist ein test1</description>
-     <key rot="0">_G6fF14@</key>
-     <entry id="1">
-          <text>Du siehst aus wie ein Gulak</text>
-          <answer target="2">Danke sehr nett von dir!</answer>
-          <answer target="3">Halts maul alter</answer>
-     </entry>
-     <entry id="2">
-          <text>Gulaks sind hässlich wie die nacht!</text>
-          <answer target="0">Dann kannst du nicht mich meinen.</answer>
-     </entry>
-     <entry id="3">
-          <text>WTF?</text>
-          <answer target="0">Bye, bye.</answer>
-     </entry>
-</plott>
+<questchain>
+     <name>Firstimpact</name>
+     <key>_G6fF14@</key>
+     <start>1</start>
+     <quest id="1">
+          <name>Test</name>
+          <conversation id="1">
+               <text>Du siehst aus wie ein Gulak</text>
+               <answer target="break">
+                    
+               </answer>
+               <action>Null</action>
+          </conversation>
+     </quest>
+</questchain>

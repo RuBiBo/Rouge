@@ -5,44 +5,59 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
         <link rel="stylesheet" type="text/css" href="main.css">
         <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="source/MiniCrypt.js"></script>
+        <script type="text/javascript" src="src/MiniCrypt.js"></script>
+	<script type="text/javascript" src="src/Main.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.structure.min.css">
+	<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.theme.min.css">
+	<script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+	<style>
+	    .ui-div{
+		float:left;
+		background-color: #f4f4f4;
+		padding:5px;
+		margin:5px;
+	    }
+	</style>
     </head>
     <body>
-	<p>PlotCrypt is an tool for projekt 'Rouge'</p>
-	<input id="modi" value="-65"/>
-	<br/>
-        <textarea id= "textbox1" name="message" rows="10" cols="30">This is a test text!</textarea>
-        <br/>
-        <input id="keybox" value="x!34bbGH_"/>
-        <br/>
-        <textarea id= "textbox2" name="message" rows="10" cols="30">
-            See here crypted text.
-        </textarea>
-        <br/>
-        <textarea id= "textbox3" name="message" rows="10" cols="30">
-            For checking see here the encryptet text.
-        </textarea>
-        <br/>
-        <button type="button" id="button1">Start</button>
+	<div id="toolbar" class=".ui-widget-shadow">
+	    
+	    <ul id="icons" class="ui-widget ui-helper-clearfix">
+		<li class="ui-state-default ui-corner-all">
+		    <span id="menu_new" class="ui-icon ui-icon-script" title="New QuestChain"></span>
+		</li>
+	    </ul> 
+	</div>
+	<div id="firstemptyline">
+	    Empty Project
+	</div>
 	
+	<div id="qc_config" class="ui-div ui-corner-all">
+	    <h4>QuestChain</h4>
+	    <p class="ui-div">
+		Name <input type="text" id="qc_config_name"/>
+	    </p>
+	    <p class="ui-div">
+		Key <input type="text" id="qc_config_key"/>
+	    </p>
+	</div>
     </body>
     <script>
-        function click1 () {
-            var cry = new MiniCrypt();
-            cry.modifyer = parseInt($('#modi').val());
-            var code = cry.DE($('#keybox').val(),$('#textbox1').val());
-            $('#textbox2').val(code);
-            var uncode = cry.EN($('#keybox').val(),$('#textbox2').val());
-            $('#textbox3').val(uncode);
-	    if ($('#textbox1').val() != $('#textbox3').val()) {
-		alert('Error');
-	    }
-        }
-        
+	
         $( document ).ready(function() {
-            $( "#button1" ).click(function() {
-                click1();
-            });
+	    var cry = new MiniCrypt();
+	    $( document ).tooltip();
+	    $( "#firstemptyline" ).position({
+		my: "center center",
+		at: "center center",
+		of: "body"
+	    });
+	    $("#menu_new").click(function(){
+		alert('clicked on new!');
+	    });
         });
+        
     </script>
 </html>
