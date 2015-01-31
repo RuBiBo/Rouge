@@ -35,9 +35,9 @@ MiniCrypt.prototype.strechKey = function fn0(key,length) {
     return longKey;
 }
 /****
- * DE = decrypt
+ * en = encode
  */
-MiniCrypt.prototype.DE = function fn1 (key, text) {
+MiniCrypt.prototype.en = function fn1 (key, text) {
     var message = "", currentChar ="", currentKeyChar = "";
     var strechedKey = this.strechKey(key, text.length);
     
@@ -55,9 +55,9 @@ MiniCrypt.prototype.DE = function fn1 (key, text) {
     return message;
 }
 /*****
- * EN = encrypt
+ * de = decode
  */
-MiniCrypt.prototype.EN = function fn2 (key,text) {
+MiniCrypt.prototype.de = function fn2 (key,text) {
     var message = "", currentChar ="", currentKeyChar = "";
     var strechedKey = this.strechKey(key, text.length);
     

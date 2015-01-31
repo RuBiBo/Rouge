@@ -1,4 +1,13 @@
-function MiniCrypt () {}
+function MiniCrypt () {
+    this.checkOver = function (value) {
+        if (value > 255) {
+            value -= 254;
+        } else if (value < 1) {
+            value += 254;
+        }
+        return value
+    }
+}
 /*******
  * stechKey adjust key length
  */
@@ -26,9 +35,9 @@ MiniCrypt.prototype.strechKey = function fn0(key,length) {
     return longKey;
 }
 /****
- * DE = decrypt
+ * en = encode
  */
-MiniCrypt.prototype.DE = function fn1 (key, text) {
+MiniCrypt.prototype.en = function fn1 (key, text) {
     var message = "", currentChar ="", currentKeyChar = "";
     var strechedKey = this.strechKey(key, text.length);
     
@@ -39,19 +48,17 @@ MiniCrypt.prototype.DE = function fn1 (key, text) {
         currentKeyChar = strechedKey.charCodeAt(i);
         currentChar = text.charCodeAt(i);
         x = parseInt(currentKeyChar) + parseInt(currentChar);
-        //console.log("crypt("+i+")"+currentChar + "+" + currentKeyChar +"="+x);
+        x = this.checkOver(x);
         message += String.fromCharCode(x);
     }
     
     return message;
 }
 /*****
- * EN = encrypt
+ * de = decode
  */
-MiniCrypt.prototype.EN = function fn2 (key,text) {
-    var message = ""; 
-    var currentChar ="";
-    var currentKeyChar = "";
+MiniCrypt.prototype.de = function fn2 (key,text) {
+    var message = "", currentChar ="", currentKeyChar = "";
     var strechedKey = this.strechKey(key, text.length);
     
     for (i = 0;i < text.length ;i++) {
@@ -59,7 +66,7 @@ MiniCrypt.prototype.EN = function fn2 (key,text) {
         currentChar = text.charCodeAt(i);
         x = parseInt(currentKeyChar) - parseInt(currentChar);
         x = -1*x;
-        //console.log("enc("+i+")"+currentChar + "-" + currentKeyChar +"="+x);
+        x = this.checkOver(x);
         message += String.fromCharCode(x);
     }
     

@@ -7,6 +7,7 @@
         <script type="text/javascript" src="jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="src/MiniCrypt.js"></script>
 	<script type="text/javascript" src="src/Main.js"></script>
+	<script type="text/javascript" src="src/FormHandler.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.structure.min.css">
@@ -22,6 +23,7 @@
 	</style>
     </head>
     <body>
+	
 	<div id="toolbar" class=".ui-widget-shadow">
 	    
 	    <ul id="icons" class="ui-widget ui-helper-clearfix">
@@ -33,9 +35,9 @@
 	<div id="firstemptyline">
 	    Empty Project
 	</div>
-	
+	<!----
 	<div id="qc_config" class="ui-div ui-corner-all">
-	    <h4>QuestChain</h4>
+	    <h5>QuestChain</h5>
 	    <p class="ui-div">
 		Name <input type="text" id="qc_config_name"/>
 	    </p>
@@ -43,19 +45,29 @@
 		Key <input type="text" id="qc_config_key"/>
 	    </p>
 	</div>
+	--->
     </body>
     <script>
+	var cry = new MiniCrypt();
+	var _fh = new FormHandler();
+	var main = new main();
 	
+	function click1() {
+	    console.log("click1()");
+	    $("body").append(main.createNewDialog());
+	    $("#firstemptyline").remove();
+	}
         $( document ).ready(function() {
-	    var cry = new MiniCrypt();
 	    $( document ).tooltip();
+	    
 	    $( "#firstemptyline" ).position({
 		my: "center center",
 		at: "center center",
 		of: "body"
 	    });
+	    
 	    $("#menu_new").click(function(){
-		alert('clicked on new!');
+		click1();	
 	    });
         });
         

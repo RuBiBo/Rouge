@@ -5,12 +5,12 @@
      <start>1</start>
      <quest id="1">
           <name>Test</name>
-          <conversation id="1">
+          <dialogs id="1">
                <text>Du siehst aus wie ein Gulak</text>
-               <answer target="break">
+               <answer target="break" action="">
                     
                </answer>
                <action>Null</action>
-          </conversation>
+          </dialogs>
      </quest>
 </questchain>
