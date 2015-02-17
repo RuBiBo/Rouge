@@ -5,7 +5,7 @@ body {
    padding: 0px;
    margin: 0px;
 }
-div#toolbar {
+.toolbar {
    background-color: #f4f4f4;
    padding:5px;
    margin:0px;

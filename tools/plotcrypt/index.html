@@ -20,11 +20,29 @@
 		padding:5px;
 		margin:5px;
 	    }
+	    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+	    .label, .input { display:block; }
+	    .text { margin-bottom:12px; width:95%; padding: .4em; }
+	    fieldset { padding:0; border:0; margin-top:25px; }
+	    .ui-dialog .ui-state-error { padding: .3em; }
+	    
+	    div#SideBar {
+		font-size: 0.91em;
+		float: left; width: 22em;
+		margin: 0; padding: 0;
+		border: 1px dashed silver;
+	    }
+	    div#Content {
+		margin-left: 22em;
+		padding: 0 1em;
+		border: 1px dashed silver;
+		min-width: 16em;
+	    }
 	</style>
     </head>
     <body>
 	
-	<div id="toolbar" class=".ui-widget-shadow">
+	<div id="toolbar" class="toolbar">
 	    
 	    <ul id="icons" class="ui-widget ui-helper-clearfix">
 		<li class="ui-state-default ui-corner-all">
@@ -32,6 +50,36 @@
 		</li>
 	    </ul> 
 	</div>
+	<!---
+	<div id="projektbar" class="toolbar">
+	    <label for="projektname">name</label>
+	    <input name="projektname" id="projektname" type="text" class="text ui-widget-content ui-corner-all"/>
+	    <label for="projektkey">projektkey</label>
+	    <input name="projektkey" id="projektkey" type="text" class="text ui-widget-content ui-corner-all"/>
+	</div>
+	--->
+	
+	<div id="ContentBox">
+	    <div id="SideBar">
+		SideBar
+	    </div>
+	    <div id="Content">
+		Content
+	    </div>
+	</div>
+	<div id="dialog-form" title="Create new projekt">
+	    <p class="validateTips">All form fields are required.</p>
+	    <form>
+		<fieldset>
+		    <label class="label tex ui-corner-allt" for="name">Name</label>
+		    <input class="input text ui-corner-all" type="text" name="name" id="name"  class="text ui-widget-content ui-corner-all">
+		    <label class="label text ui-corner-all" for="key">Key</label>
+		    <input class="input text ui-corner-all" type="text" name="key" id="key"  class="text ui-widget-content ui-corner-all">
+		    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+		</fieldset>
+	    </form>
+	</div>
+	
 	<div id="firstemptyline">
 	    Empty Project
 	</div>
@@ -54,12 +102,47 @@
 	
 	function click1() {
 	    console.log("click1()");
-	    $("body").append(main.createNewDialog());
+	    $("#Content").append(main.createNewDialog());
 	    $("#firstemptyline").remove();
+	    projektConfigs();
+	    dialog.dialog("close");
 	}
+	function testClick () {
+	    dialog.dialog("open");
+	}
+	function projektConfigs() {
+	    console.log("projektConfigs()");
+	    $("#projektname").val($("#name").val());
+	    $("#projektkey").val($("#key").val());
+	    
+	}
+	
+	function addDialog () {
+	    dialog = $( "#dialog-form" ).dialog({
+		autoOpen: false,
+		height: 400,
+		width: 600,
+		modal: true,
+		buttons: {
+		    "Set": click1,
+		    Cancel: function() {
+			dialog.dialog( "close" );
+		    }
+		},
+		close: function() {
+		    form[ 0 ].reset();
+		    //allFields.removeClass( "ui-state-error" );
+		}			
+	    });
+	    form = dialog.find( "form" ).on( "submit", function( event ) {
+		event.preventDefault();
+		projektConfigs();
+	    });
+	}
+	
         $( document ).ready(function() {
 	    $( document ).tooltip();
-	    
+	    addDialog();
 	    $( "#firstemptyline" ).position({
 		my: "center center",
 		at: "center center",
@@ -67,7 +150,8 @@
 	    });
 	    
 	    $("#menu_new").click(function(){
-		click1();	
+		testClick();
+		//click1();	
 	    });
         });
         
